@@ -185,7 +185,7 @@ def Graficar():
 
     for i in listaDatos:
         x = i["nombre"].replace(" ", "_")
-        archivoDoT.write(x+'[color=greenyellow, style=filled, label="'+ x +'|'+ i["año"]+'|'+i["género"]+'"]\n')
+        archivoDoT.write(x+'[fillcolor=greenyellow, style=filled, label="'+ x +'|{'+ i["año"]+'|'+i["género"]+'}"]\n')
 
     for i in listaDatos:
         s = i["nombre"].replace(" ", "_")
