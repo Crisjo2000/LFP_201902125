@@ -62,7 +62,11 @@ def AbrirArchivo():
         return datos
 #LECTURA DE LOS DATOS    
 def LeerDatos():
-    lineas = AbrirArchivo().readlines()
+    try:
+        lineas = AbrirArchivo().readlines()
+    except:
+        print(Fore.RED + "Error al leer el archivo\n")
+        return None
     for i in lineas:
         i = i.replace("\n", "")
         i = i.split(";")
@@ -180,12 +184,16 @@ def Graficar():
     archivoDoT.write('node[shape=record, fontname="Arial Black", fontsize=14]\n')
 
     for i in listaDatos:
-        archivoDoT.write(i["nombre"]+'[color=Grey, style=filled, label="'+i["nombre"] +'|'+ i["año"]+'|'+i["género"]+'"]\n')
+        x = i["nombre"].replace(" ", "_")
+        archivoDoT.write(x+'[color=greenyellow, style=filled, label="'+ x +'|'+ i["año"]+'|'+i["género"]+'"]\n')
 
     for i in listaDatos:
+        s = i["nombre"].replace(" ", "_")
         for j in i["actores"]:
-            archivoDoT.write(i["nombre"]+'->'+ j + "\n")
-    
+            x = j.replace(" ", "_")
+            archivoDoT.write(x+'[color=Blue, fontcolor=White, style=filled, label="'+ x +'"]\n')
+            archivoDoT.write( s +'->'+ x + "\n")
+
     archivoDoT.write("} \n")
     archivoDoT.close()
     
